@@ -1,0 +1,5 @@
+export const ALPHABET = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+export const ALPHABET_LENGTH = 26;
+
+export const LOWERCASE_INDEX = 97;
+export const UPPERCASE_INDEX = 65;
