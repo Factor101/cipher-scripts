@@ -104,6 +104,8 @@ export const Vigenere = function()
         {
             const a = bestKeyLengths[i];
             const b = bestKeyLengths[i + 1];
+
+            // dumbass check need 2 fix
             if(a.keyLength % b.keyLength === 0 || Math.abs(a.ioc - b.ioc) < ARBITRARY_THRESHOLD / 2) {
                 bestKeyLengths.splice(i, 1);
                 i--;
