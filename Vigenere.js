@@ -61,7 +61,7 @@ export const Vigenere = function()
 
     this.bruteForce = (str) =>
     {
-        /** @typedef KeySample {keyLength: number, ioc: number} */
+        /** @typedef {{keyLength: number, ioc: number}} KeySample */
         /** @type {KeySample[]} */
         const keyLengths = [];
 

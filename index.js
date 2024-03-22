@@ -5,7 +5,6 @@ import { Vigenere } from "./Vigenere.js";
 // key length = 3
 //const plaintext = "TOBEORNOTTOTHATISTHEQUESTION";
 //const key = "YES";
-const key = "PZAKZNVQSQIIS";
 
 (() => {
     // ic = 0.03991
@@ -13,6 +12,7 @@ const key = "PZAKZNVQSQIIS";
     // pK = 26
 
     const plaintext = "IhadseenlittleofHolmeslatelyMymarriagehaddriftedusawayfromeachotherMyowncompletehappinessandthehomecentredinterestswhichriseuparoundthemanwhofirstfindshimselfmasterofhisownestablishmentweresufficienttoabsorballmyattentionwhileHolmeswholoathedeveryformofsocietywithhiswholeBohemiansoulremainedinourlodgingsinBakerStreetburiedamonghisoldbooksandalternatingfromweektoweekbetweencocaineandambitionthedrowsinessofthedrugandthefierceenergyofhisownkeennatureHewasstillaseverdeeplyattractedbythestudyofcrimeandoccupiedhisimmensefacultiesandextraordinarypowersofobservationinfollowingoutthosecluesandclearingupthosemysterieswhichhadbeenabandonedashopelessbytheofficialpoliceFromtimetotimeIheardsomevagueaccountofhisdoingsofhissummonstoOdessainthecaseoftheTrepoffmurderofhisclearingupofthesingulartragedyoftheAtkinsonbrothersatTrincomaleeandfinallyofthemissionwhichhehadaccomplishedsodelicatelyandsuccessfullyforthereigningfamilyofHollandBeyondthesesignsofhisactivityhoweverwhichImerelysharedwithallthereadersofthedailypressIknewlittleofmyformerfriendandcompanion";
+    const key = "PZAKZNVQSQIIS";
     const vigenere = new Vigenere();
     const ciphertext = vigenere.encode(plaintext, key).toUpperCase();
     //const str = "JWcowQrroryGdqwetXuvujiehOiafJixiDnvwgtZoEbiEkdumpIjLjeEjrbx";

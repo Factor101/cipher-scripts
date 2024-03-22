@@ -53,22 +53,3 @@ export function buildCosets(str, l)
 
     return cosets;
 }
-
-/**
- *
- * @param {number[]} expected
- * @param {number[]} observed
- */
-function chiSquared(expected, observed)
-{
-    if(expected.length !== observed.length) {
-        throw new Error(`Expected and observed arrays must be of the same length (Given: ${expected.length}, ${observed.length})`);
-    }
-
-    return expected.reduce((a, b, i) => {
-        return a + Math.pow((observed[i] - b), 2) / b;
-    }, 0);
-}
-
-const expected = new Array(5).fill(1).concat(new Array(5).fill(0));
-const observed = new Array(7).fill(1).concat(new Array(3).fill(0))
