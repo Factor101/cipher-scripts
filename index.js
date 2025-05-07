@@ -1,3 +1,5 @@
+// noinspection SpellCheckingInspection
+
 import { caesarCipher } from './caesar.js';
 import { Vigenere } from "./Vigenere.js";
 
@@ -5,16 +7,19 @@ import { Vigenere } from "./Vigenere.js";
 // key length = 3
 //const plaintext = "TOBEORNOTTOTHATISTHEQUESTION";
 //const key = "YES";
-const key = "PZAKZNVQSQIIS";
 
 (() => {
     // ic = 0.03991
     // pK = 13
     // pK = 26
-
-    const plaintext = "IhadseenlittleofHolmeslatelyMymarriagehaddriftedusawayfromeachotherMyowncompletehappinessandthehomecentredinterestswhichriseuparoundthemanwhofirstfindshimselfmasterofhisownestablishmentweresufficienttoabsorballmyattentionwhileHolmeswholoathedeveryformofsocietywithhiswholeBohemiansoulremainedinourlodgingsinBakerStreetburiedamonghisoldbooksandalternatingfromweektoweekbetweencocaineandambitionthedrowsinessofthedrugandthefierceenergyofhisownkeennatureHewasstillaseverdeeplyattractedbythestudyofcrimeandoccupiedhisimmensefacultiesandextraordinarypowersofobservationinfollowingoutthosecluesandclearingupthosemysterieswhichhadbeenabandonedashopelessbytheofficialpoliceFromtimetotimeIheardsomevagueaccountofhisdoingsofhissummonstoOdessainthecaseoftheTrepoffmurderofhisclearingupofthesingulartragedyoftheAtkinsonbrothersatTrincomaleeandfinallyofthemissionwhichhehadaccomplishedsodelicatelyandsuccessfullyforthereigningfamilyofHollandBeyondthesesignsofhisactivityhoweverwhichImerelysharedwithallthereadersofthedailypressIknewlittleofmyformerfriendandcompanion";
+    // const plaintext = "IhadseenlittleofHolmeslatelyMymarriagehaddriftedusawayfromeachotherMyowncompletehappinessandthehomecentredinterestswhichriseuparoundthemanwhofirstfindshimselfmasterofhisownestablishmentweresufficienttoabsorballmyattentionwhileHolmeswholoathedeveryformofsocietywithhiswholeBohemiansoulremainedinourlodgingsinBakerStreetburiedamonghisoldbooksandalternatingfromweektoweekbetweencocaineandambitionthedrowsinessofthedrugandthefierceenergyofhisownkeennatureHewasstillaseverdeeplyattractedbythestudyofcrimeandoccupiedhisimmensefacultiesandextraordinarypowersofobservationinfollowingoutthosecluesandclearingupthosemysterieswhichhadbeenabandonedashopelessbytheofficialpoliceFromtimetotimeIheardsomevagueaccountofhisdoingsofhissummonstoOdessainthecaseoftheTrepoffmurderofhisclearingupofthesingulartragedyoftheAtkinsonbrothersatTrincomaleeandfinallyofthemissionwhichhehadaccomplishedsodelicatelyandsuccessfullyforthereigningfamilyofHollandBeyondthesesignsofhisactivityhoweverwhichImerelysharedwithallthereadersofthedailypressIknewlittleofmyformerfriendandcompanion";
+    // const key = "PZAKZNVQSQIIS";
+    const plaintext = "Hello Sukran";
+    const key = "stefan wenzke";
     const vigenere = new Vigenere();
     const ciphertext = vigenere.encode(plaintext, key).toUpperCase();
+    console.log("Plaintext: ", plaintext, '\n', "Ciphertext: ", ciphertext, '\n', "Key: ", key);
+    console.log("Decrypted: ", vigenere.decode(ciphertext, key).toUpperCase());
     //const str = "JWcowQrroryGdqwetXuvujiehOiafJixiDnvwgtZoEbiEkdumpIjLjeEjrbx";
-    console.log(vigenere.bruteForce(ciphertext));
+    //console.log(vigenere.bruteForce(ciphertext));
 })();

@@ -1,62 +1,47 @@
-import { MAX_KEY_LENGTH, RANDOM_INDEX_OF_COINCIDENCE } from './constants.js';
+import { ALPHABET_LENGTH, MAX_KEY_LENGTH, RANDOM_INDEX_OF_COINCIDENCE, UPPERCASE_INDEX } from './constants.js';
 import { indexOfCoincidence, buildCosets } from './vigenereCrack.js';
 
 export const Vigenere = function()
 {
-    /**
-     *
-     * @param {string} str
-     * @param {string} key
-     * @returns {string}
-     */
-    this.encode = (str, key) =>
-    {
-        key = key.toUpperCase();
-        const keystream = (function* () {
-            const len = key.length - 1;
-            let i = 0;
-            while(true) {
-                if(i > len) {
-                    i = 0;
-                }
 
-                yield key.charAt(i++);
-            }
-        })();
+    this.encodingInternal = (str, key, isModeEncode) =>
+    {
+        str = str.toUpperCase();
+        const keystream = createKeyStream(key);
 
         return str.split('').map(e => {
-            if(/[^a-z]/i.test(e)) {
+            if(/[^A-Z]/.test(e))
+            {
                 return e;
             }
 
-            const baseIndex = e === e.toUpperCase() ? 65 : 97;
-            return String.fromCharCode(((e.toUpperCase().charCodeAt() + keystream.next().value.charCodeAt()) % 26) + baseIndex);
+            // noinspection JSCheckFunctionSignatures
+            return isModeEncode
+                   ? String.fromCharCode(((e.charCodeAt() + keystream.next().value.charCodeAt()) % ALPHABET_LENGTH) + UPPERCASE_INDEX)
+                   : String.fromCharCode(((e.charCodeAt() - keystream.next().value.charCodeAt() + ALPHABET_LENGTH) % ALPHABET_LENGTH) + UPPERCASE_INDEX);
         }).join('');
     }
 
+    /**
+     *
+     * @param {string} str - Plaintext
+     * @param {string} key - Key string
+     * @returns {string} - Encoded string
+     */
+    this.encode = (str, key) =>
+    {
+        return this.encodingInternal(str, key, true);
+    }
+
+    /**
+     *
+     * @param str - Plaintext
+     * @param key - Key string
+     * @returns {string} - Decoded string
+     */
     this.decode = (str, key) =>
     {
-        key = key.toUpperCase();
-        const keystream = (function* () {
-            const len = key.length - 1;
-            let i = 0;
-            while(true) {
-                if(i > len) {
-                    i = 0;
-                }
-
-                yield key.charAt(i++);
-            }
-        })();
-
-        return str.split('').map(e => {
-            if(/[^a-z]/i.test(e)) {
-                return e;
-            }
-
-            const baseIndex = e === e.toUpperCase() ? 65 : 97;
-            return String.fromCharCode(((e.toUpperCase().charCodeAt() - keystream.next().value.charCodeAt() + 26) % 26) + baseIndex);
-        }).join('');
+        return this.encodingInternal(str, key, false);
     }
 
     this.bruteForce = (str) =>
@@ -104,6 +89,8 @@ export const Vigenere = function()
         {
             const a = bestKeyLengths[i];
             const b = bestKeyLengths[i + 1];
+
+            // this check is sorta nonsense rn lol
             if(a.keyLength % b.keyLength === 0 || Math.abs(a.ioc - b.ioc) < ARBITRARY_THRESHOLD / 2) {
                 bestKeyLengths.splice(i, 1);
                 i--;
@@ -112,4 +99,27 @@ export const Vigenere = function()
 
         return bestKeyLengths;
     }
+}
+
+/**
+ *
+ * @param key
+ * @returns {Generator<*, void, *>}
+ */
+const createKeyStream = (key) =>
+{
+    key = key.toUpperCase();
+    return (function* () {
+        const len = key.length - 1;
+        let i = 0;
+        while(true)
+        {
+            if(i > len)
+            {
+                i = 0;
+            }
+
+            yield key.charAt(i++);
+        }
+    })();
 }
